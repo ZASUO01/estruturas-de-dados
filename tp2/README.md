@@ -1,3 +1,4 @@
+# TP2 - Algorítmos de Ordenação
 ## Objetivo
 
 Este trabalho consiste em analisar o desempenho de diferentes algoritmos de ordenação em
@@ -9,8 +10,8 @@ geradas.
 
 ## Descrição
 
-Foi comparado o desempenho de diferentes variações do Quicksort para
-ordenar um conjunto de N registros armazenados em um vetor. Essas variações foram ainda compradas 
+Deve-se comparar o desempenho de diferentes variações do Quicksort para
+ordenar um conjunto de N registros armazenados em um vetor. Essas variações devem ainda ser compradas 
 com o Heapsort e Mergesort.
 Cada registro contém:
 
@@ -30,10 +31,37 @@ partições a serem processadas posteriormente.
 - Quicksort Empilha Inteligente: esta variação do Quicksort processa primeiro a menor
 partição.
 
+## Análise de Complexidade
+Segue uma comparação teórica do desempenho desses algorítmos.
 
-## Avaliação
+| Algoritmo     | Melhor Caso | Caso Médio  | Pior Caso   | Espaço Auxiliar | Estável? |
+|--------------|------------|------------|------------|---------------|---------|
+| **Heap Sort**  | O(n log n) | O(n log n) | O(n log n) | O(1) | Não |
+| **Merge Sort** | O(n log n) | O(n log n) | O(n log n) | O(n) | Sim |
+| **Quick Sort** | O(n log n) | O(n log n) | O(n²) | O(log n) | Não |
 
-Cada algoritmo foi aplicado a entradas aleatórias com diferentes
+- Heap Sort
+-- Usa uma heap para organizar os elementos.
+-- Apresenta complexidade constante O(n log n) em todos os casos.
+-- Não necessita de espaço extra.
+-- Não é estável e chaves iguais podem ser trocadas de posição.
+
+- Merge Sort
+-- Utiliza o paradigma de divisão e consquista.
+-- Garante sempre a complexidade O(n log n).
+-- Requer O(n) espaço adicional na fusão das sublistas.
+-- É estavél.
+ 
+- Quick Sort
+-- Escolhe um pivô e particiona o array.
+-- No melhor e caso médio apresenta O(n log n) de complexidade.
+-- No pior caso da escolha de um pivô ruim, a complexidade piora para O(n²).
+-- O espaço adicional gasto na recursão é em media O(log n). A versão iterativa elimina esse gasto.
+-- Não é estável.
+
+## Avaliação Experimental
+
+Cada algoritmo deve ser aplicado a entradas aleatórias com diferentes
 tamanhos N = 1000, 5000, 10000, 50000, 100000, 500000 e 1000000.
 Os valores médios de 5 execuções foram contabilizados.
 
@@ -45,12 +73,27 @@ Para executar cada algorítmo deve-se rodar:
 # compilar o programa
 make
 
+# executar os casos de teste
+make quick_sort
+make merge_sort
+make heap_sort
+
+```
+
+Exemplo de execução:
+```sh
 # program [algname] -v version -s seed -k optional -m optional -i input -o output  
 ./bin/main quicksort -v 1 -s 10 -i input.txt -o output.txt
+```
 
+Para analise visual dos dados:
+```sh
 # gerar graficos
 make plot
 ```
-
-
+Para limpar o projeto para uma nova execução:
+```sh
+make clean
+make clean_plot
+```
 

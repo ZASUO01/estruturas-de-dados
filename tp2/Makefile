@@ -20,18 +20,21 @@ $(TARGET): $(OBJS) | $(BIN)
 $(OBJ)/%.o: $(SRC)/%.c | $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BIN) $(OBJ) $(OUT):
+$(BIN) $(OBJ):
 	mkdir -p $@
 
+$(OUT):
+	mkdir -p $(OUT)/qs
+
 quick_sort: $(OUT)
-	$(TARGET) quicksort -v 1 -s 10 -i input.txt -o $(OUT)/qs_1.txt
-	$(TARGET) quicksort -v 2 -s 10 -k 3 -i input.txt -o $(OUT)/qs_2_1.txt
-	$(TARGET) quicksort -v 2 -s 10 -k 5 -i input.txt -o $(OUT)/qs_2_2.txt
-	$(TARGET) quicksort -v 2 -s 10 -k 7 -i input.txt -o $(OUT)/qs_2_3.txt
-	$(TARGET) quicksort -v 3 -s 10 -m 10 -i input.txt -o $(OUT)/qs_3_1.txt
-	$(TARGET) quicksort -v 3 -s 10 -m 100 -i input.txt -o $(OUT)/qs_3_2.txt
-	$(TARGET) quicksort -v 4 -s 10 -i input.txt -o $(OUT)/qs_4.txt
-	$(TARGET) quicksort -v 5 -s 10 -i input.txt -o $(OUT)/qs_5.txt
+	$(TARGET) quicksort -v 1 -s 10 -i input.txt -o $(OUT)/qs/qs_1.txt
+	$(TARGET) quicksort -v 2 -s 10 -k 3 -i input.txt -o $(OUT)/qs/qs_2_1.txt
+	$(TARGET) quicksort -v 2 -s 10 -k 5 -i input.txt -o $(OUT)/qs/qs_2_2.txt
+	$(TARGET) quicksort -v 2 -s 10 -k 7 -i input.txt -o $(OUT)/qs/qs_2_3.txt
+	$(TARGET) quicksort -v 3 -s 10 -m 10 -i input.txt -o $(OUT)/qs/qs_3_1.txt
+	$(TARGET) quicksort -v 3 -s 10 -m 100 -i input.txt -o $(OUT)/qs/qs_3_2.txt
+	$(TARGET) quicksort -v 4 -s 10 -i input.txt -o $(OUT)/qs/qs_4.txt
+	$(TARGET) quicksort -v 5 -s 10 -i input.txt -o $(OUT)/qs/qs_5.txt
 
 
 heap_sort: $(OUT)
@@ -41,6 +44,7 @@ merge_sort: $(OUT)
 	$(TARGET) mergesort -v 1 -s 10 -i input.txt -o $(OUT)/ms.txt
 
 plot:
+	rm -rf images
 	mkdir -p images
 	python3 plot.py
 
